@@ -31,6 +31,8 @@
  * target instruction sets.
  */
 
+#include <emmintrin.h>
+
 static enum libdeflate_result ATTRIBUTES
 FUNCNAME(struct libdeflate_decompressor * restrict d,
 	 const void * restrict in, size_t in_nbytes,
@@ -347,10 +349,21 @@ have_decode_tables:
 		out_next += length;
 
 		if (UNALIGNED_ACCESS_IS_FAST &&
-		    /* max overrun is writing 3 words for a min length match */
+		    /* max overrun is writing 4 words for a min length match */
 		    likely(out_end - out_next >=
-			   3 * WORDBYTES - DEFLATE_MIN_MATCH_LEN)) {
-			if (offset >= WORDBYTES) { /* words don't overlap? */
+			   4 * WORDBYTES - DEFLATE_MIN_MATCH_LEN)) {
+			if (offset >= 2 * WORDBYTES) {
+				_mm_storeu_si128((__m128i*)dst,
+						 _mm_loadu_si128((__m128i*)src));
+				src += 16;
+				dst += 16;
+				do {
+					_mm_storeu_si128((__m128i*)dst,
+							 _mm_loadu_si128((__m128i*)src));
+					src += 16;
+					dst += 16;
+				} while (dst < out_next);
+			} else if (offset >= WORDBYTES) { /* words don't overlap? */
 				copy_word_unaligned(src, dst);
 				src += WORDBYTES;
 				dst += WORDBYTES;
