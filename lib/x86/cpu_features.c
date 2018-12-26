@@ -78,6 +78,7 @@ read_xcr(u32 index)
 
 static const struct cpu_feature x86_cpu_feature_table[] = {
 	{X86_CPU_FEATURE_SSE2,		"sse2"},
+	{X86_CPU_FEATURE_SSSE3,		"ssse3"},
 	{X86_CPU_FEATURE_PCLMUL,	"pclmul"},
 	{X86_CPU_FEATURE_AVX,		"avx"},
 	{X86_CPU_FEATURE_AVX2,		"avx2"},
@@ -108,6 +109,9 @@ void setup_cpu_features(void)
 
 	if (IS_SET(features_2, 1))
 		features |= X86_CPU_FEATURE_PCLMUL;
+
+	if (IS_SET(features_2, 9))
+		features |= X86_CPU_FEATURE_SSSE3;
 
 	if (IS_SET(features_2, 27)) { /* OSXSAVE set? */
 		u64 xcr0 = read_xcr(0);
