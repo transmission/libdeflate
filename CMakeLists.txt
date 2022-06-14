@@ -54,18 +54,15 @@ if (NOT DEFLATE_DISABLE_GZIP)
 endif()
 
 set(LIBDEFLATE_HEADERS
-  common/compiler_msc.h
-  common/compiler_gcc.h
-  common/common_defs.h
+  common_defs.h
   lib/bt_matchfinder.h
   lib/matchfinder_common.h
-  lib/unaligned.h
   lib/gzip_constants.h
   lib/zlib_constants.h
-  lib/crc32_vec_template.h
   lib/decompress_template.h
   lib/deflate_compress.h
-  lib/crc32_table.h
+  lib/crc32_multipliers.h
+  lib/crc32_tables.h
   lib/x86/decompress_impl.h
   lib/x86/crc32_impl.h
   lib/x86/cpu_features.h
@@ -76,6 +73,8 @@ set(LIBDEFLATE_HEADERS
   lib/hc_matchfinder.h
   lib/cpu_features_common.h
   lib/arm/crc32_impl.h
+  lib/arm/crc32_pmull_helpers.h
+  lib/arm/crc32_pmull_wide.h
   lib/arm/cpu_features.h
   lib/arm/adler32_impl.h
   lib/arm/matchfinder_impl.h
