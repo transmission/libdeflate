@@ -212,20 +212,6 @@ typedef size_t machine_word_t;
 #  define NORETURN
 #endif
 
-/*
- * restrict - hint that writes only occur through the given pointer.
- *
- * Don't use MSVC's __restrict, since it has nonstandard behavior.
- * Standard restrict is okay, if it is supported.
- */
-#if !defined(__STDC_VERSION__) || (__STDC_VERSION__ < 201112L)
-#  if defined(__GNUC__) || defined(__clang__)
-#    define restrict		__restrict__
-#  else
-#    define restrict
-#  endif
-#endif /* else assume 'restrict' is usable as-is */
-
 /* likely(expr) - hint that an expression is usually true */
 #if defined(__GNUC__) || __has_builtin(__builtin_expect)
 #  define likely(expr)		__builtin_expect(!!(expr), 1)
