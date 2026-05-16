@@ -79,7 +79,7 @@ if(NOT LIBDEFLATE_USER_SET_RELEASE_FLAGS)
     set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG"
         CACHE STRING "C compiler flags for release builds" FORCE)
 endif()
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 if(NOT MSVC)
     check_c_compiler_flag(-Wdeclaration-after-statement HAVE_WDECLARATION_AFTER_STATEMENT)
     check_c_compiler_flag(-Wimplicit-fallthrough HAVE_WIMPLICIT_FALLTHROUGH)

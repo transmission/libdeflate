@@ -85,8 +85,8 @@ If you are doing a freestanding build with `-ffreestanding`, you must add
 
 - gcc: v4.9 and later
 - clang: v3.9 and later (upstream), Xcode 8 and later (Apple)
-- MSVC: Visual Studio 2015 and later
-- Other compilers: any other C99-compatible compiler should work, though if your
+- MSVC: Visual Studio 2019 version 16.8 and later
+- Other compilers: any other C11-compatible compiler should work, though if your
   compiler pretends to be gcc, clang, or MSVC, it needs to be sufficiently
   compatible with the compiler it pretends to be.
 

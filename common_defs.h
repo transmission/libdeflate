@@ -159,8 +159,8 @@ typedef size_t machine_word_t;
 #endif
 #ifdef _MSC_VER
 #  define MSVC_PREREQ(version)	(_MSC_VER >= (version))
-#  if !MSVC_PREREQ(1900)
-#    error "MSVC versions older than Visual Studio 2015 are no longer supported"
+#  if !MSVC_PREREQ(1928)
+#    error "MSVC versions older than Visual Studio 2019 v16.8 are no longer supported"
 #  endif
 #else
 #  define MSVC_PREREQ(version)	0
