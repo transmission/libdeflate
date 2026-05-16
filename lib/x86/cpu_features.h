@@ -165,6 +165,15 @@ static inline u32 get_x86_cpu_features(void) { return 0; }
 #  define HAVE_AVXVNNI(features)	((features) & X86_CPU_FEATURE_AVXVNNI)
 #endif
 
+#if ((CLANG_PREREQ(18, 0, 18000000) && !CLANG_PREREQ(19, 0, 19000000))) \
+	&& !defined(__EVEX512__) /* avoid subtracting the evex512 feature */
+#  define EVEX512	",evex512"	/* needed to override potential -mno-evex512 */
+#  define NO_EVEX512	",no-evex512"
+#else
+#  define EVEX512	""
+#  define NO_EVEX512	""
+#endif
+
 #endif /* ARCH_X86_32 || ARCH_X86_64 */
 
 #endif /* LIB_X86_CPU_FEATURES_H */
